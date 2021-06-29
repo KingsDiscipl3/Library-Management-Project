@@ -9,6 +9,7 @@
 #include <string.h>
 #include <iomap.h>
 
+
 // Classes in the Project
 
 class book 
@@ -17,7 +18,7 @@ class book
   char bookName[50];
   char authorName[20];
 public:
-  void creat_book() 
+  void create_book() 
   {
     cout << "\n NEW BOOK ENTRY... \n";
     cout << "\n Enter The Book Number: ";
@@ -31,6 +32,24 @@ public:
   
   void show_book() 
   {
-    
+      cout << "\n Book Number: " << bookNumber;
+      cout << "\n Book Name: ";
+      puts(bookName);
+      cout << "Author's Name: ";
+      puts(authorName);
+  }
+
+  void modify_book()
+  {
+      cout << "\n Book Number: " << bookNumber;
+      cout << "\n Modify Book Name: ";
+      gets(bookName);
+      cout << "\n Modify Author's Name: ";
+      gets(authorName);
+  }
+
+  const char* returnBookNumber() 
+  {
+      return bookNumber;
   }
 }
