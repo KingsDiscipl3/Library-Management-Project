@@ -13,5 +13,24 @@
 
 class book 
 {
-
+  char bookNumber[6];
+  char bookName[50];
+  char authorName[20];
+public:
+  void creat_book() 
+  {
+    cout << "\n NEW BOOK ENTRY... \n";
+    cout << "\n Enter The Book Number: ";
+    cin >> bookNumber;
+    cout << "\n\n Enter The Name Of The Book: ";
+    gets(bookNumber);
+    cout << "\n\n Enter Author's Name: ";
+    gets(authorName);
+    cout << "\n\n Book Created...";
+  }
+  
+  void show_book() 
+  {
+    
+  }
 }
