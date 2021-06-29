@@ -52,4 +52,27 @@ public:
   {
       return bookNumber;
   }
+
+  void report() 
+  {
+      cout << bookNumber << setw(30) << bookName << setw(30) << authorName << endl;
+  }
+
+}
+
+
+
+class student
+{
+    char admissionNumber[6];
+    char studentName[20];
+    char studentBookNumber[6];
+    int token;
+public:
+    void create_student() 
+    {
+        clrscr();
+        cout << "\n NEW STUDENT ENTRY...";
+
+    }
 }
