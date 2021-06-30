@@ -84,6 +84,18 @@ public:
 
     void show_student() 
     {
+        cout << "\n Admission Number: " << admissionNumber;
+        cout << "\n Student Name: ";
+        puts(studentName);
+        cout << "Number Of Book Issued: " << token;
+        if (token == 1)
+            cout << "\n Book Number:" << studentBookNumber;
+    }
 
+    void modify_student() 
+    {
+        cout << "\n Admission Number: " << admissionNumber;
+        cout << "\n Modify Student Name: ";
+        gets(studentName);
     }
 }
