@@ -98,4 +98,52 @@ public:
         cout << "\n Modify Student Name: ";
         gets(studentName);
     }
+
+    const char* returnAdmissionNumber() 
+    {
+        return admissionNumber;
+    }
+
+    const char* returnStudentBookNumber() 
+    {
+        return studentBookNumber;
+    }
+
+    const char* returnToken() 
+    {
+        return token;
+    }
+
+    void addToken() 
+    {
+        token = 1;
+    }
+
+    void resetToken() 
+    {
+        token = 0;
+    }
+
+    void getStudentBookNumber(char t[]) 
+    {
+        strcpy(studentBookNumber, t);
+    }
+
+    void report() 
+    {
+        cout << "\t" << admissionNumber << setw(20) << studentName << setw(10) << token << endl;
+    }
+}
+
+
+
+fstream fp, fp2;
+book bk;
+student st;
+
+
+
+void write_book() 
+{
+
 }
