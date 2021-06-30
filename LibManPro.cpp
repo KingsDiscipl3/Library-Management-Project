@@ -73,6 +73,17 @@ public:
     {
         clrscr();
         cout << "\n NEW STUDENT ENTRY...";
+        cout << "\n Enter The Admission Number: ";
+        cin >> admissionNumber;
+        cout << "]n]n Enter The Name Of The Student: ";
+        gets(studentName);
+        token = 0;
+        studentBookNumber[0] = '/0';
+        cout << "\n\n Student Record Created...";
+    }
+
+    void show_student() 
+    {
 
     }
 }
