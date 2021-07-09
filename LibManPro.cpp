@@ -145,5 +145,72 @@ student st;
 
 void write_book() 
 {
+    char ch;
+    fp.open("book.dat", ios::out | ios::app);
+    do 
+    {
+        clrscr();
+        bk.create_book();
+        fp.write((const char*)&bk, sizeof(book));
+        cout << "\n\n Do you want to add more record..(y/n?)";
+        cin >> ch;
+    } while (ch == 'y' || ch == 'Y');
+    fp.close();
+}
 
+void write_student() 
+{
+    char ch;
+    fp.open("student.dat", ios::out | ios::app);
+    do 
+    {
+        st.create_student();
+        fp.write((const char*)&st, sizeof(student));
+        cout << "\n\n Do you want to add more record..(y/n?)";
+        cin >> ch;
+    } while (ch == 'y' || ch == 'Y');
+    fp.close();
+}
+
+
+
+// Function to read a specific record on file
+
+void display_specific_book() 
+{
+    cout << "\n BOOK DETAILS \n";
+    int flag = 0;
+    fp.open("book.dat", ios::in);
+    while (fp.read((const char*)&bk, sizeof(book))) 
+    {
+        if (strcmpi(bk.returnBookNumber(), n) == 0) 
+        {
+            bk.show_book();
+            flag = 1;
+        }
+    }
+
+    fp.close();
+    if (flag == 0)
+        cout << "\n\n Book Does Not Exist";
+    getch();
+}
+
+void display_specific_student(char n[]) 
+{
+    cout << "\n STUDENT DETAILS \n";
+    int flag = 0;
+    fp.open("student.dat", ios::in);
+    while (fp.read((const char*)&st, sizeof(student))) 
+    {
+        if (strcmpi(st.returnAdmissionNumber(), n) == 0) 
+        {
+            st.show_student();
+            flag = 1;
+        }
+    }
+
+    fp.close();
+    if (flag == 0)
+        cout << "\n\n Student Does Not Exist";
 }
