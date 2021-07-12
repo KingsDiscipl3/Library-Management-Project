@@ -214,3 +214,141 @@ void display_specific_student(char n[])
     if (flag == 0)
         cout << "\n\n Student Does Not Exist";
 }
+
+// Functions to modify record of file
+
+void modify_book() 
+{
+    char numberInput[6];
+    int found = 0;
+    clrscr();
+    cout << "\n\n\t MODIFY BOOK RECOD....";
+    cout << "\n\n\t Enter the book number to modify";
+    cin >> numberInput;
+    fp.open("book.dat", ios::in | ios::out);
+    while (fp.read((const char*)&bk, sizeof(book)) && found == 0) 
+    {
+        if (strcmpi(bk.returnBookNumber(), numberInput) == 0) 
+        {
+            bk.show_book();
+            cout << "\n Enter New Details Of The Book" << endl;
+            bk.modify_book();
+            int pos = -1 * sizeof(bk);
+            fp.seekp(pos, ios::cur);
+            fp.write((const char*)&bk, sizeof(book));
+            cout << "\n\n\t Record Updated";
+            found = 1;
+        }
+    }
+
+    fp.close();
+    if (found == 0)
+        cout << "\n\n Record Not Found";
+    getch();
+}
+
+void modify_student()
+{
+    char admissionInput[6];
+    int found = 0;
+    clrscr();
+    cout << "\n\n\t MODIFY STUDENT RECORD...";
+    fp.open("student.dat", ios::in | ios::out);
+    while (fp.read((const char*)&st, sizeof(student)) && found == 0) 
+    {
+        if (scrcmpi(st.returnAdmissionNumber(), admissionInput) == 0) 
+        {
+            st.show_student();
+            cout << "\n Enter New Student Details" << endl;
+            st.modify_student();
+            int pos = -1 * sizeof(st);
+            fp.seekp(pos, ios::cur);
+            fp.write((const char*)&st, sizeof(student));
+            cout << "\n\n\t Record Updated";
+            found = 1;
+        }
+    }
+
+    fp.close();
+    if (found == 0)
+        cout << "\n\n Record Not Found";
+    getch();
+}
+
+
+// Functions to delete record of file
+
+void delete_student() 
+{
+    char admissionInput[6];
+    int flag = 0;
+    clrscr();
+    cout << "\n\n\t DELETE STUDENT...";
+    cout << "\n\n Enter The Admission Number of Student to Delete: ";
+    cin > admissionInput;
+    fp.open("student.dat", ios::in | ios::out);
+    fstream fp2;
+    fp2.open("temp.dat", ios::out);
+    fp.seekg(0, ios::beg);
+    while (fp.read((const char*)&st, sizeof(student))) 
+    {
+        if (strcmpi(st.returnAdmissionNumber(), admissionInput) != 0)
+            fp2.write((const char*)&st, sizeof(student));
+        else
+            flag = 1;
+    }
+
+    fp2.close();
+    fp.close();
+    remove("student.dat");
+    rename("temp.dat", "student.dat");
+    if (flag == 0)
+        cout << "\n\n\t Record Deleted...";
+    else
+        cout << "\n\n Record Not Found";
+    getch();
+}
+
+void delete_book() 
+{
+    char numberInput[6];
+    clrscr();
+    cout << "\n\n\t DELETE BOOK...";
+    cout << "\n\n Enter Book To Be Deleted: ";
+    cin >> numberInput;
+    fp.open("book.dat", ios::in | ios::out);
+    fstream fp2;
+    fp2.open("temp.dat", ios::out);
+    fp.seekg(0, ios::beg);
+    while (fp.read((const char*)&bk, sizeof(book))) 
+    {
+        if(strcmpi(bk.returnBookNumber(), numberInput) != 0) 
+        {
+            fp2.write((const char*)&bk, sizeof(book));
+        }
+    }
+
+    fp2.close();
+    fp.close();
+    remove("book.dat");
+    rename("temp.dat", "book.dat");
+    cout << "\n\n\t Record Deleted...";
+    getch();
+}
+
+
+// Functions to display all students or books
+
+void display_all_students() 
+{
+    clrscr();
+    fp.open("student.dat", ios::in);
+    if (!fp) 
+    {
+        cout << "ERROR!! FILE COULD NOT BE OPEN";
+        getch();
+        return;
+    }
+
+
+}
