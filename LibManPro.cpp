@@ -448,5 +448,5 @@ void book_deposit()
     char student_number[6], book_number[6];
     int found = 0, flag = 0, day, fine;
     clrscr();
-    cout 
+    cout << 
 }
