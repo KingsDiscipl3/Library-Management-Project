@@ -350,5 +350,103 @@ void display_all_students()
         return;
     }
 
+    cout << "\n\n\t STUDENT LIST \n\n";
+    cout << "================================================================================\n";
+    cout << "\t Admission Number" << setw[10] << "Student Name" << setw[20] << "Book Issued \n";
+    cout << "================================================================================\n";
 
+    while (fp.read((const char*)&st, sizeof(student))) 
+    {
+        st.report();
+    }
+
+    fp.close();
+    getch();
+}
+
+
+void display_all_books() 
+{
+    clrscr();
+    fp.open("book.dat", ios::in);
+    if (fp) 
+    {
+        cout << "ERROR!! FILE COULD NOT BE OPENED";
+        getch();
+        return;
+    }
+
+    cout << "\n\n\t BOOK LIST \n\n";
+    cout << "===================================================================================\n";
+    cout << "\t Book Number" << setw[20] << "Book Name" << setw[25] << "Author \n";
+    cout << "===================================================================================\n";
+
+    while (fp.read((const char*)&bk, sizeof(book))) 
+    {
+        bk.report();
+    }
+
+    fp.close();
+    getch();
+}
+
+
+// Function to issue book
+
+void book_issue() 
+{
+    char student_number[6], book_number[6];
+    int found = 0, flag = 0;
+    clrscr();
+    cout << "\n\n BOOK ISSUE...";
+    cout << "\n\n\t Enter The Student's Admission Number: ";
+    cin >> student_number;
+    fp.open("student.dat", ios::in | ios::out);
+    fp1.open("book.dat", ios::in | ios::out);
+    while (fp.read((const char*)&st, sizeof(student)) && found == 0) 
+    {
+        if (strcmpi(st.returnAdmissionNumber(), student_number) == 0) 
+        {
+            found = 1;
+            if (st.returnToken() == 0)
+            {
+                cout << "\n\n\t Enter the Book Number: ";
+                cin >> book_number;
+                while (fp1.read((const char*)&bk, sizeof(book)) && flag = 0)
+                {
+                    if (strcmpi(bk.returnBookNumber(), book_number) == 0)
+                    {
+                        bk.show_book();
+                        flag = 1;
+                        st.addToken();
+                        st.getStudentBookNumber(bk.returnBookNumber());
+                        int pos = -1 * sizeof(st);
+                        fp.seekp(pos, ios::cur);
+                        fp.write((const char*)&st, sizeof(student));
+                        cout << "\n\n\t Book issued successfully \n\n Please note: Write the current date in the back of the book";
+                    }
+                    if (flag == 0)
+                        cout << "Book NUmber Does Not Exist...";
+                }
+            }
+            else
+                cout << "You have not returned the last book";
+        }
+    }
+    if (found == 0)
+        cout << "Student Record Does Not Exist...";
+    getch();
+    fp.close();
+    fp1.close();
+}
+
+
+// Function to deposit book
+
+void book_deposit() 
+{
+    char student_number[6], book_number[6];
+    int found = 0, flag = 0, day, fine;
+    clrscr();
+    cout 
 }
